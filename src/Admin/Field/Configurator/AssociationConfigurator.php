@@ -258,7 +258,7 @@ final class AssociationConfigurator implements FieldConfiguratorInterface
         $field->setFormattedValue($this->formatAsString($field->getValue(), $targetEntityDto));
     }
 
-    private function configureToManyAssociation(FieldDto $field): void
+    private function configureToManyAssociation(FieldDto $field, EntityDto $entityDto): void
     {
         $field->setCustomOption(AssociationField::OPTION_DOCTRINE_ASSOCIATION_TYPE, 'toMany');
 
