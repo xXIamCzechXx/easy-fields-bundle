@@ -4,6 +4,7 @@ namespace Adeliom\EasyFieldsBundle\Admin\Field\Configurator;
 
 use Adeliom\EasyFieldsBundle\Admin\Field\AssociationField;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\PersistentCollection;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -44,7 +45,7 @@ final class AssociationConfigurator implements FieldConfiguratorInterface
     public function configure(FieldDto $field, EntityDto $entityDto, AdminContext $context): void
     {
         $propertyName = $field->getProperty();
-        if (!$entityDto->isAssociation($propertyName)) {
+        if (!$this->isAssociation($entityDto->getClassMetadata(), $propertyName)) {
             throw new \RuntimeException(sprintf('The "%s" field is not a Doctrine association, so it cannot be used as an association field.', $propertyName));
         }
 
@@ -215,5 +216,23 @@ final class AssociationConfigurator implements FieldConfiguratorInterface
         }
 
         return 0;
+    }
+
+    private function isAssociation(ClassMetadata $entityClassMetadata, string $property): bool
+    {
+        $nestedProperties = explode('.', $property);
+
+        $nextProperty = array_shift($nestedProperties);
+
+        if (!$entityClassMetadata->hasAssociation($nextProperty)) {
+            return false;
+        } elseif (0 === \count($nestedProperties)) {
+            return true;
+        }
+
+        return $this->isAssociation(
+            $this->entityFactory->getEntityMetadata($entityClassMetadata->getAssociationTargetClass($nextProperty)),
+            implode('.', $nestedProperties),
+        );
     }
 }
