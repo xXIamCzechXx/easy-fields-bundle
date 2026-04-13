@@ -25,7 +25,7 @@ class EntityTypeExtension extends AbstractTypeExtension
             AssociationField::OPTION_BUTTON_ADD_LABEL => 'action.add_new_item',
             AssociationField::OPTION_BUTTON_ADD_ICON => 'fa-plus',
             AssociationField::OPTION_LIST_SELECTOR => false,
-            AssociationField::OPTION_CRUD_CONTROLLER => null,
+            AssociationField::OPTION_EMBEDDED_CRUD_FORM_CONTROLLER => null,
             AssociationField::OPTION_LIST_BUTTON_LABEL => 'action.list_items',
             AssociationField::OPTION_LIST_BUTTON_ICON => 'fa-list',
             AssociationField::OPTION_LIST_BUTTON_CANCEL_LABEL => 'action.list.cancel',
@@ -44,9 +44,9 @@ class EntityTypeExtension extends AbstractTypeExtension
             $view->vars[$option] = $options[$option];
         }
 
-        if (isset($options[AssociationField::OPTION_ALLOW_ADD]) && $options[AssociationField::OPTION_ALLOW_ADD] && !empty($options[AssociationField::OPTION_CRUD_CONTROLLER])) {
+        if (isset($options[AssociationField::OPTION_ALLOW_ADD]) && $options[AssociationField::OPTION_ALLOW_ADD] && !empty($options[AssociationField::OPTION_EMBEDDED_CRUD_FORM_CONTROLLER])) {
             $ajaxEndpointUrl = $this->adminUrlGenerator
-                ->setController($options[AssociationField::OPTION_CRUD_CONTROLLER])
+                ->setController($options[AssociationField::OPTION_EMBEDDED_CRUD_FORM_CONTROLLER])
                 ->setAction('new')
                 ->generateUrl();
             $view->vars['attr']['data-ea-ajax-new-endpoint-url'] = $ajaxEndpointUrl;
@@ -54,9 +54,9 @@ class EntityTypeExtension extends AbstractTypeExtension
 
         // dump($options[AssociationField::OPTION_LIST_SELECTOR]); exit;
 
-        if (isset($options[AssociationField::OPTION_LIST_SELECTOR]) && $options[AssociationField::OPTION_LIST_SELECTOR] && !empty($options[AssociationField::OPTION_CRUD_CONTROLLER])) {
+        if (isset($options[AssociationField::OPTION_LIST_SELECTOR]) && $options[AssociationField::OPTION_LIST_SELECTOR] && !empty($options[AssociationField::OPTION_EMBEDDED_CRUD_FORM_CONTROLLER])) {
             $ajaxEndpointUrl = $this->adminUrlGenerator
-                ->setController($options[AssociationField::OPTION_CRUD_CONTROLLER])
+                ->setController($options[AssociationField::OPTION_EMBEDDED_CRUD_FORM_CONTROLLER])
                 ->setAction('index')
                 ->generateUrl();
             $view->vars['attr']['data-ea-ajax-index-url'] = $ajaxEndpointUrl;
