@@ -1,0 +1,6 @@
+action:
+  add_new_item: "Přidal položku"
+  list_items: "Vybrat položku/y"
+  list:
+    cancel: "Zrušit"
+    validate: "Zvalidovat"
