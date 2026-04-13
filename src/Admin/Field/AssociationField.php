@@ -5,6 +5,7 @@ namespace Adeliom\EasyFieldsBundle\Admin\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Contracts\Field\FieldInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FieldTrait;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Contracts\Translation\TranslatableInterface;
 
 final class AssociationField implements FieldInterface
 {
@@ -97,7 +98,7 @@ final class AssociationField implements FieldInterface
      * @var string */
     public const PARAM_AUTOCOMPLETE_CONTEXT = 'autocompleteContext';
 
-    public static function new(string $propertyName, ?string $label = null): self
+    public static function new(string $propertyName, TranslatableInterface|string|bool|null $label = null): self
     {
         return (new self())
             ->setProperty($propertyName)
