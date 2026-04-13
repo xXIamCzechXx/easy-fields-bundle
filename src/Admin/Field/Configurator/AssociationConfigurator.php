@@ -57,11 +57,12 @@ final class AssociationConfigurator implements FieldConfiguratorInterface
 
         $field->setFormTypeOption('attr.data-ea-widget', 'ea-autocomplete');
 
-        if ($entityDto->isToOneAssociation($propertyName)) {
+        $propertyNameParts = explode('.', $propertyName);
+        if (count($propertyNameParts) <= 1 && $entityDto->getClassMetadata()->isSingleValuedAssociation($propertyName)) {
             $this->configureToOneAssociation($field);
         }
 
-        if ($entityDto->isToManyAssociation($propertyName)) {
+        if ($entityDto->getClassMetadata()->isCollectionValuedAssociation($propertyName)) {
             $this->configureToManyAssociation($field);
         }
 
