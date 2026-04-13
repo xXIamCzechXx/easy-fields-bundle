@@ -13,9 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EntityTypeExtension extends AbstractTypeExtension
 {
-    public function __construct(protected AdminUrlGenerator $adminUrlGenerator)
-    {
-    }
+    public function __construct(protected AdminUrlGenerator $adminUrlGenerator) {}
 
     /**
      * {@inheritdoc}

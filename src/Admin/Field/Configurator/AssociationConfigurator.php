@@ -122,6 +122,7 @@ final class AssociationConfigurator implements FieldConfiguratorInterface
 
         foreach ($settableOptions as $option) {
             $val = $field->getCustomOptions()->get($option);
+            dump($val);
             if ($val) {
                 $field->setFormTypeOption($option, $val);
             }
