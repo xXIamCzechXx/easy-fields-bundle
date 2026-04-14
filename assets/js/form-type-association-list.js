@@ -265,7 +265,7 @@ const AddListProperty = {
             const row = $(this);
 
             let actionsCell = row.find('.actions');
-            const checkbox = $('<input type="checkbox" />').css('pointer-events', 'none');
+            const checkbox = $('<input type="checkbox" />').addClass('list-checkbox').css('pointer-events', 'none');
 
             actionsCell.html(checkbox);
             row.css('cursor', 'pointer');

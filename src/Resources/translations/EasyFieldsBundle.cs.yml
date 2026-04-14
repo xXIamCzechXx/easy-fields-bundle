@@ -3,4 +3,4 @@ action:
   list_items: "Vybrat položku/y"
   list:
     cancel: "Zrušit"
-    validate: "Zvalidovat"
+    validate: "Zvolit vybrané"
